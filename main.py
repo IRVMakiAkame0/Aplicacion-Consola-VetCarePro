@@ -16,7 +16,7 @@ class Mascota:
 
     def obtener_peso(self):
         return self.peso
-
+        
     def preparar_datos_tabla(self):
         return [self.id_mascota, self.nombre, self.especie, self.raza, f"{self.peso} kg", self.edad]
 
