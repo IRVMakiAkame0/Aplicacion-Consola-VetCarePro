@@ -50,7 +50,7 @@ class Medicamento:
     def calcular_dosis_final(self, peso_animal):
         return peso_animal * self.dosis_base_mg
 
-    def es_peligroso_para(self, especie_paciente):
+    def verificar_si_es_peligroso(self, especie_paciente):
         return especie_paciente.lower() in [e.lower() for e in self.especies_toxicas]
 
     def preparar_datos_tabla(self):
