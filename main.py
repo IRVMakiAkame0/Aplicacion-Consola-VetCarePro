@@ -20,6 +20,26 @@ class Mascota:
     def preparar_datos_tabla(self):
         return [self.id_mascota, self.nombre, self.especie, self.raza, f"{self.peso} kg", self.edad]
 
+class Perro(Mascota):
+    def __init__(self, id_mascota, nombre, raza, peso, edad):
+        Mascota.__init__(self, id_mascota, nombre, "Perro", raza, peso, edad)  
+        
+class Gato(Mascota):
+    def __init__(self, id_mascota, nombre, raza, peso, edad):
+        Mascota.__init__(self, id_mascota, nombre, "Gato", raza, peso, edad)
+
+class Ave(Mascota):
+    def __init__(self, id_mascota, nombre, raza, peso, edad):
+        Mascota.__init__(self, id_mascota, nombre, "Ave", raza, peso, edad)
+
+class Hamster(Mascota):
+    def __init__(self, id_mascota, nombre, raza, peso, edad):
+        Mascota.__init__(self, id_mascota, nombre, "Hamster", raza, peso, edad)
+
+class Conejo(Mascota):
+    def __init__(self, id_mascota, nombre, raza, peso, edad):
+        Mascota.__init__(self, id_mascota, nombre, "Conejo", raza, peso, edad)
+
 class Medicamento:
     def __init__(self, codigo, nombre, dosis_base_mg, especies_toxicas):
         self.codigo = codigo
