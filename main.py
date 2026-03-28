@@ -56,3 +56,16 @@ class Medicamento:
     def preparar_datos_tabla(self):
         toxicos = ", ".join(self.especies_toxicas) if self.especies_toxicas else "Seguro para todos"
         return [self.codigo, self.nombre, f"{self.dosis_base_mg} mg/kg", toxicos]
+
+class ValidarDatos:
+    def verificar_numero_correcto(self, valor):
+        if valor >= 0:
+            return True 
+        else:
+            return False 
+        
+    def verificar_texto_lleno(self, texto):
+        if texto.strip():
+            return True 
+        else:
+            return False
