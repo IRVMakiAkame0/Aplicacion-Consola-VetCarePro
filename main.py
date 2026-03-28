@@ -69,3 +69,20 @@ class ValidarDatos:
             return True 
         else:
             return False
+            
+class DisenoReportes:
+    def __init__(self, clinica_nombre):
+        self.clinica_nombre = clinica_nombre
+        
+    def limpiar_la_pantalla(self):
+        # Borra lo que hay en la consola para que se vea limpio
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+    def imprimir_titulo(self):
+        print("_" *60)
+        print(f"\n {self.clinica_nombre.upper()} - SISTEMA DE GESTION".center(60))
+        print("_" *60)
+        
+    def mostrar_alerta(self, mensaje):
+        print(f"\n ¡ALERTA MEDICA! \n {mensaje}")
+
