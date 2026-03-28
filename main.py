@@ -9,3 +9,23 @@ class Mascota:
         self.raza = raza
         self.peso = peso       
         self.edad = edad
+
+    def preparar_datos_tabla(self):
+        return [self.id_mascota, self.nombre, self.especie, self.raza, f"{self.peso} kg", self.edad]
+
+class Medicamento:
+    def __init__(self, codigo, nombre, dosis_base_mg, especies_toxicas):
+        self.codigo = codigo
+        self.nombre = nombre
+        self.dosis_base_mg = dosis_base_mg
+        self.especies_toxicas = especies_toxicas 
+        
+    def calcular_dosis_final(self, peso_animal):
+        return peso_animal * self.dosis_base_mg
+
+    def es_peligroso_para(self, especie_paciente):
+        return especie_paciente.lower() in [e.lower() for e in self.especies_toxicas]
+
+    def preparar_datos_tabla(self):
+        toxicos = ", ".join(self.especies_toxicas) if self.especies_toxicas else "Seguro para todos"
+        return [self.codigo, self.nombre, f"{self.dosis_base_mg} mg/kg", toxicos]
