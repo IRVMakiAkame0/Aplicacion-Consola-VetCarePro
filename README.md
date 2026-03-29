@@ -50,7 +50,7 @@ El código está organizado bajo el paradigma de Programación Orientada a Objet
     python main.py
 
 ## Autora
-**Isabella Ruiz Velasquez** - Estudiante de Ingeniería de Sistemas (2do Semestre)
-**Institución:** Universidad de Medellín
+- **Isabella Ruiz Velasquez** - Estudiante de Ingeniería de Sistemas (2do Semestre)
+- **Institución:** Universidad de Medellín
 
 
