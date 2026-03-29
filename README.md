@@ -10,3 +10,11 @@ Este software es una solución orientada a objetos desarrollada en python para l
 - Calculo de dosificacion automatica: Determinación de mg requeridos segun el peso del animal.
 - Validacion de toxicidad: Bloqueo de recetas para medicamentos contraindicados por especie.
 - Reportes tabulares: Visualización tecnica de datos mediante la libreria Tabulate.
+
+## Tecnologías y Librerías
+- **Lenguaje:** Python 3.13.
+- **Librerias:**
+    - **tabulate:** Para la creación de tablas estéticas en la terminal.
+    - **os:** Para el diseño visual de los reportes tecnicos en la terminal.
+    - **datetime:** Para el registro de fecha y hora real en las recetas medicas.
+
