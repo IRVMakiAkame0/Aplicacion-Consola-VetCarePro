@@ -10,3 +10,10 @@ Este software es una solución orientada a objetos desarrollada en python para l
     - **tabulate:** Para la creación de tablas estéticas en la terminal.
     - **os:** Para el diseño visual de los reportes tecnicos en la terminal.
     - **datetime:** Para el registro de fecha y hora real en las recetas medicas.
+ 
+## Funcionalidades implementadas
+- Gestión de pacientes: Registro detallado que incluye especie y raza para precision diagnostica.
+- Gestión de entidades mediante diccionarios: Uso de estructuras tipo dict para busquedas eficientes de pacientes y medicamentos.
+- Calculo de dosificacion automatica: Determinación de mg requeridos segun el peso del animal.
+- Validacion de toxicidad: Bloqueo de recetas para medicamentos contraindicados por especie.
+- Reportes tabulares: Visualización tecnica de datos mediante la libreria tabulate.
