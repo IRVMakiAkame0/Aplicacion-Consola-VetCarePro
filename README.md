@@ -37,3 +37,20 @@ El código está organizado bajo el paradigma de Programación Orientada a Objet
 3. **Cálculo de dosis:** Validar que el peso multiplicado por la dosis base genere el resultado correcto en la receta.
 4. **Prueba de toxicidad:** Intentar recetar un medicamento marcado como tóxico para una especie; el sistema muestra **¡ALERTA MÉDICA!** y debe bloquear la transacción de la receta.
 
+## Instrucciones de instalación y configuración:
+### Requisitos previos
+- **Python 3.13** o superior.
+- Gestor de paquetes `pip` actualizado.
+
+1. Clone este repositorio en su máquina local:
+   git clone https://github.com/IRVMakiAkame0/Aplicacion-Consola-VetCarePro.git
+2. Instale las dependencias necesarias (tabulate):
+    pip install tabulate
+3. Ejecute el archivo principal para iniciar el sistema:
+    python main.py
+
+## Autora
+**Isabella Ruiz Velasquez** - Estudiante de Ingeniería de Sistemas (2do Semestre)
+**Institución:** Universidad de Medellín
+
+
