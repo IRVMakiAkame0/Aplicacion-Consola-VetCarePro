@@ -86,3 +86,63 @@ class DisenoReportes:
     def mostrar_alerta(self, mensaje):
         print(f"\n ¡ALERTA MEDICA! \n {mensaje}")
 
+class ClinicaVeterinaria:
+    def __init__(self, nombre_negocio):
+        self.nombre_negocio = nombre_negocio
+        self.registros_mascotas = {}
+        self.inventario_farmacia = {}
+        self.diseno = DisenoReportes(nombre_negocio)
+        self.validar = ValidarDatos()
+        
+    def registrar_mascota(self, mascota_nueva):
+        if not self.validar.verificar_numero_correcto(mascota_nueva.peso):
+            print(f"Error: El peso de {mascota_nueva.nombre} debe ser positivo.")
+            return
+
+        if mascota_nueva.id_mascota in self.registros_mascotas:
+            print(f"Error: El ID {mascota_nueva.id_mascota} ya existe.")
+            return
+        self.registros_mascotas[mascota_nueva.id_mascota] = mascota_nueva
+        
+    def agregar_medicamento(self, medicamento_nuevo):
+        if medicamento_nuevo.codigo in self.inventario_farmacia:
+            print("Error: El codigo ya existe.")
+            return
+        self.inventario_farmacia[medicamento_nuevo.codigo] = medicamento_nuevo
+
+    def mostrar_reportes(self):
+        self.diseno.limpiar_la_pantalla()
+        self.diseno.imprimir_titulo()
+        
+        lista_mascotas = [m.preparar_datos_tabla() for m in self.registros_mascotas.values()]
+        lista_medicina = [med.preparar_datos_tabla() for med in self.inventario_farmacia.values()]
+        
+        print(f"\n         PACIENTES REGISTRADOS EN {self.nombre_negocio.upper()}    ")
+        print(tabulate(lista_mascotas, headers=["ID", "Nombre", "Especie", "Raza", "Peso", "Edad"], tablefmt="fancy_grid"))
+        
+        print("\n          INVENTARIO DE MEDICAMENTOS    ")
+        print(tabulate(lista_medicina, headers=["Código", "Nombre", "Dosis", "Toxicidad"], tablefmt="fancy_grid"))
+
+    def generar_receta(self, id_buscado, cod_buscado):
+        mascota = self.registros_mascotas.get(id_buscado)
+        medicina = self.inventario_farmacia.get(cod_buscado)
+
+        if not mascota or not medicina:
+            return "Error: Mascota o medicamento no encontrados."
+
+        if medicina.verificar_si_es_peligroso(mascota.obtener_especie()):
+            self.diseno.mostrar_alerta(f"El medicamento {medicina.nombre} NO ES APTO para un {mascota.especie}.")
+            return "\n RECETA CANCELADA \n"
+
+        total_mg = medicina.calcular_dosis_final(mascota.obtener_peso())
+        fecha_hoy = datetime.now().strftime("%d/%m/%Y %H:%M")
+
+        return (f"\nRECETA GENERADA {fecha_hoy}    \n"
+                f"  Paciente: {mascota.nombre} ({mascota.raza})\n"
+                f"  Medicamento: {medicina.nombre}\n"
+                f"  Dosis Recomendada: {total_mg} mg\n"
+                f"________________________________________")
+
+
+
+
