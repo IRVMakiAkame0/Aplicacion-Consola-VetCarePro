@@ -143,6 +143,24 @@ class ClinicaVeterinaria:
                 f"  Dosis Recomendada: {total_mg} mg\n"
                 f"________________________________________")
 
+#seccion de pruebas
+sistema = ClinicaVeterinaria("VetCare Pro")
 
+#comprobacion del funcioanmiento de registro de las mascotas (id, nombre, especie, raza, peso, edad)
+p1 = Perro("10", "Max", "Golden", 30.5, 5)
+p2 = Gato("20", "Luna", "Persa", 4.2, 3)
+sistema.registrar_mascota(p1)
+sistema.registrar_mascota(p2)
+
+#prueba del funcionamiento de la clase Medicamento (codigo, nombre del medicamento, dosis, toxicidad)
+med1 = Medicamento("M01", "Amoxicilina", 12.0, [])
+med2 = Medicamento("M02", "Ibuprofeno", 5.0, ["Gato"]) 
+sistema.agregar_medicamento(med1)
+sistema.agregar_medicamento(med2)
+
+#comprobacion del funcionamiento de las recetas y la toxicidad en animales (id del paciente, codigo)
+sistema.mostrar_reportes()
+print(sistema.generar_receta("10", "M01")) 
+print(sistema.generar_receta("20", "M02")) 
 
 
