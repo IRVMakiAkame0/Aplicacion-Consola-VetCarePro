@@ -21,3 +21,24 @@ class Mascota(ABC):
     @abstractmethod
     def revisar_paciente(self) -> str:
         pass
+
+class Perro(Mascota):
+    def __init__(self, id_mascota: str, nombre: str, raza: str, sexo: str, peso: float, edad: int, nombre_dueno: str, fecha_registro: str):
+        super().__init__(id_mascota, nombre, "Perro", raza, sexo, peso, edad, nombre_dueno, fecha_registro)  
+    
+    def revisar_paciente(self) -> str:
+        return "Inspección canina"
+        
+class Gato(Mascota):
+    def __init__(self, id_mascota: str, nombre: str, raza: str, sexo: str, peso: float, edad: int, nombre_dueno: str, fecha_registro: str):
+        super().__init__(id_mascota, nombre, "Gato", raza, sexo, peso, edad, nombre_dueno, fecha_registro)
+        
+    def revisar_paciente(self) -> str:
+        return "Inspección felina"
+
+class Ave(Mascota):
+    def __init__(self, id_mascota: str, nombre: str, raza: str, sexo: str, peso: float, edad: int, nombre_dueno: str, fecha_registro: str):
+        super().__init__(id_mascota, nombre, "Ave", raza, sexo, peso, edad, nombre_dueno, fecha_registro)
+        
+    def revisar_paciente(self) -> str:
+        return "Inspección aviar"
