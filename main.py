@@ -30,3 +30,11 @@ class ClinicaVeterinaria:
             self.contadores_ids["perro"] += 1
             
         return f"{prefijo}{consecutivo:04d}"
+
+    def registrar_mascota(self, mascota_nueva) -> None:
+        if not self.validar.verificar_numero_correcto(mascota_nueva.peso):
+            raise PesoInvalidoError(f"El peso de {mascota_nueva.nombre} debe ser mayor a cero.")
+        self.registros_mascotas[mascota_nueva.id_mascota] = mascota_nueva
+        
+    def agregar_medicamento(self, medicamento_nuevo: Medicamento) -> None:
+        self.inventario_farmacia[medicamento_nuevo.nombre] = medicamento_nuevo
