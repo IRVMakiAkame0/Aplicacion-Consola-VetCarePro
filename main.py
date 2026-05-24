@@ -38,3 +38,30 @@ class ClinicaVeterinaria:
         
     def agregar_medicamento(self, medicamento_nuevo: Medicamento) -> None:
         self.inventario_farmacia[medicamento_nuevo.nombre] = medicamento_nuevo
+        
+    def generar_receta(self, id_buscado: str, nombre_medicina: str, enfermedad: str) -> str:
+        mascota = self.registros_mascotas.get(id_buscado)
+        medicina = self.inventario_farmacia.get(nombre_medicina)
+
+        if not mascota:
+            raise ValueError("ID de mascota no encontrado en los registros.")
+        if not medicina:
+            raise ValueError("Seleccione un medicamento valido.")
+        if not enfermedad.strip():
+            raise ValueError("Debe ingresar el diagnostico medico.")
+
+        if medicina.verificar_si_es_peligroso(mascota.obtener_especie()):
+            raise MedicamentoPeligrosoError(f"ALERTA: El medicamento {medicina.nombre} es TOXICO para la especie {mascota.especie}.")
+
+        total_mg = medicina.calcular_dosis_final(mascota.peso)
+
+        return (f"--- RECETA VETERINARIA ---\n\n"
+                f"Fecha Emisión: {mascota.fecha_registro}\n"
+                f"Paciente ID: {mascota.id_mascota}\n\n"
+                f"Paciente: {mascota.nombre} (Raza: {mascota.raza} - {mascota.sexo})\n"
+                f"Edad: {mascota.edad} años | Peso: {mascota.peso} kg\n"
+                f"Responsable: {mascota.nombre_dueno}\n"
+                f"Diagnóstico: {enfermedad}\n\n"
+                f"Medicamento: {medicina.nombre}\n"
+                f"Dosis Calculada: {total_mg} mg\n"
+                f"--------------------------")
