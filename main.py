@@ -208,3 +208,55 @@ class InterfazGUI:
         except PesoInvalidoError as error:
             messagebox.showwarning("Aviso", str(error))
 
+    def procesar_receta(self):
+        id_b = self.entrada_id_buscar.get().strip()
+        enfermedad = self.entrada_enfermedad.get().strip().capitalize()
+        medicina = self.combo_medicina.get()
+
+        try:
+            resultado_receta = self.sistema.generar_receta(id_b, medicina, enfermedad)
+            messagebox.showinfo("Receta Generada", resultado_receta)
+            self.limpiar_todo()
+        except Exception as error:
+            messagebox.showerror("Error", str(error))
+
+    def limpiar_todo(self):
+        self.entrada_nombre.delete(0, tk.END)
+        self.entrada_dueno.delete(0, tk.END)
+        self.entrada_edad.set(0)
+        self.entrada_peso.delete(0, tk.END)
+        self.entrada_id_buscar.delete(0, tk.END)
+        self.entrada_enfermedad.delete(0, tk.END)
+        self.combo_especie.set("")
+        self.combo_raza.set("")
+        self.combo_sexo.set("")
+        self.combo_medicina.set("")
+
+    def abrir_ventana_reportes(self):
+        sub_ventana = tk.Toplevel(self.ventana)
+        sub_ventana.title("Historial Clinico")
+        sub_ventana.geometry("950x500")
+        sub_ventana.configure(bg=self.color_fondo)
+
+        frame_busqueda = tk.Frame(sub_ventana, bg=self.color_fondo, pady=15)
+        frame_busqueda.pack(fill="x", padx=20)
+
+        tk.Label(frame_busqueda, text="Filtrar por nombre:", bg=self.color_fondo, font=("Segoe UI", 10)).grid(row=0, column=0, padx=5)
+        entrada_filtro = tk.Entry(frame_busqueda, width=22)
+        entrada_filtro.grid(row=0, column=1, padx=5)
+
+        columnas = ("ID", "Mascota", "Especie", "Raza", "Sexo", "Edad", "Peso", "Dueño", "Registro")
+        tabla = ttk.Treeview(sub_ventana, columns=columnas, show="headings")
+        for col in columnas:
+            tabla.heading(col, text=col)
+            tabla.column(col, width=100, anchor="center")
+        tabla.pack(fill="both", expand=True, padx=20, pady=20)
+
+        for m in self.sistema.registros_mascotas.values():
+            tabla.insert("", "end", values=(m.id_mascota, m.nombre, m.especie, m.raza, m.sexo, m.edad, m.peso, m.nombre_dueno, m.fecha_registro))
+
+if __name__ == "__main__":
+    raiz = tk.Tk()
+    app = InterfazGUI(raiz)
+    raiz.mainloop()
+
