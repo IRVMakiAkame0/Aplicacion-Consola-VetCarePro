@@ -87,3 +87,81 @@ class InterfazGUI:
         self.sistema = ClinicaVeterinaria("VetCare Pro")
         self.cargar_medicamentos()
         self.dibujar_elementos()
+
+    def cargar_medicamentos(self):
+        self.sistema.agregar_medicamento(Medicamento("Amoxicilina", 12.0, []))
+        self.sistema.agregar_medicamento(Medicamento("Cefalexina", 20.0, []))
+        self.sistema.agregar_medicamento(Medicamento("Meloxicam", 0.1, []))
+        self.sistema.agregar_medicamento(Medicamento("Ibuprofeno", 5.0, ["Gato", "Ave"])) 
+        self.sistema.agregar_medicamento(Medicamento("Paracetamol", 10.0, ["Gato", "Perro"]))
+        self.sistema.agregar_medicamento(Medicamento("Permetrina", 15.0, ["Gato", "Ave"]))
+        self.sistema.agregar_medicamento(Medicamento("Vitaminas Complejo B", 2.0, []))
+
+    def dibujar_elementos(self):
+        fuente_titulo_app = ("Segoe UI", 18, "bold")
+        fuente_subtitulos = ("Segoe UI", 12, "bold")
+        fuente_label_normal = ("Segoe UI", 10, "normal") 
+        fuente_entrada = ("Segoe UI", 10)
+
+        tk.Label(self.ventana, text="VetCare Pro", font=fuente_titulo_app, bg=self.color_fondo, fg=self.color_morado_oscuro).pack(pady=(20, 10))
+
+        frame_registro = tk.Frame(self.ventana, bg=self.color_fondo)
+        frame_registro.pack(pady=10)
+
+        tk.Label(frame_registro, text="Informacion del Paciente", font=fuente_subtitulos, bg=self.color_fondo, fg=self.color_lila).grid(row=0, column=0, columnspan=2, pady=(0, 15))
+
+        tk.Label(frame_registro, text="Nombre del Animal:", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=1, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.entrada_nombre = tk.Entry(frame_registro, width=32, font=fuente_entrada, fg=self.color_texto, relief="solid", bd=1)
+        self.entrada_nombre.grid(row=1, column=1, sticky="w", pady=6)
+
+        tk.Label(frame_registro, text="Responsable / Dueño:", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=2, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.entrada_dueno = tk.Entry(frame_registro, width=32, font=fuente_entrada, fg=self.color_texto, relief="solid", bd=1)
+        self.entrada_dueno.grid(row=2, column=1, sticky="w", pady=6)
+
+        tk.Label(frame_registro, text="Especie:", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=3, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.combo_especie = ttk.Combobox(frame_registro, values=list(DICCIONARIO_RAZAS.keys()), state="readonly", width=30)
+        self.combo_especie.grid(row=3, column=1, sticky="w", pady=6)
+        self.combo_especie.bind("<<ComboboxSelected>>", self.actualizar_lista_razas)
+
+        tk.Label(frame_registro, text="Raza:", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=4, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.combo_raza = ttk.Combobox(frame_registro, state="readonly", width=30)
+        self.combo_raza.grid(row=4, column=1, sticky="w", pady=6)
+
+        tk.Label(frame_registro, text="Sexo:", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=5, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.combo_sexo = ttk.Combobox(frame_registro, values=["Macho", "Hembra"], state="readonly", width=30)
+        self.combo_sexo.grid(row=5, column=1, sticky="w", pady=6)
+
+        tk.Label(frame_registro, text="Edad (Años):", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=6, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.entrada_edad = ttk.Spinbox(frame_registro, from_=0, to=30, width=15)
+        self.entrada_edad.grid(row=6, column=1, sticky="w", pady=6)
+
+        tk.Label(frame_registro, text="Peso (Kg):", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=7, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.entrada_peso = tk.Entry(frame_registro, width=17, font=fuente_entrada, fg=self.color_texto, relief="solid", bd=1)
+        self.entrada_peso.grid(row=7, column=1, sticky="w", pady=6)
+
+        tk.Button(frame_registro, text="Registrar y Generar ID", bg=self.color_morado_oscuro, fg="white", font=("Segoe UI", 10, "bold"), relief="flat", cursor="hand2", command=self.procesar_registro).grid(row=8, column=0, columnspan=2, pady=(15, 0), ipadx=15, ipady=4)
+
+        frame_medico = tk.Frame(self.ventana, bg=self.color_fondo)
+        frame_medico.pack(pady=15)
+
+        tk.Label(frame_medico, text="Orden Medica y Dosificacion", font=fuente_subtitulos, bg=self.color_fondo, fg=self.color_lila).grid(row=0, column=0, columnspan=2, pady=(0, 15))
+
+        tk.Label(frame_medico, text="ID Registrado:", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=1, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.entrada_id_buscar = tk.Entry(frame_medico, width=32, font=("Segoe UI", 10, "bold"), fg=self.color_morado_oscuro, relief="solid", bd=1)
+        self.entrada_id_buscar.grid(row=1, column=1, sticky="w", pady=6)
+
+        tk.Label(frame_medico, text="Diagnostico:", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=2, column=0, sticky="e", pady=6, padx=(0, 10))
+        self.entrada_enfermedad = tk.Entry(frame_medico, width=32, font=fuente_entrada, fg=self.color_texto, relief="solid", bd=1)
+        self.entrada_enfermedad.grid(row=2, column=1, sticky="w", pady=6)
+
+        tk.Label(frame_medico, text="Medicamento:", bg=self.color_fondo, fg=self.color_texto, font=fuente_label_normal).grid(row=3, column=0, sticky="e", pady=6, padx=(0, 10))
+        lista_meds = sorted(list(self.sistema.inventario_farmacia.keys()))
+        self.combo_medicina = ttk.Combobox(frame_medico, values=lista_meds, state="readonly", width=30)
+        self.combo_medicina.grid(row=3, column=1, sticky="w", pady=6)
+
+        # Botón Generar Receta
+        tk.Button(frame_medico, text="Generar Receta", bg=self.color_morado_oscuro, fg="white", font=("Segoe UI", 10, "bold"), relief="flat", cursor="hand2", command=self.procesar_receta).grid(row=4, column=0, columnspan=2, pady=(15, 0), ipadx=15, ipady=4)
+
+        # Botón Ver Historial Clinico
+        tk.Button(self.ventana, text="Ver Historial Clinico", bg=self.color_morado_claro, fg=self.color_texto, font=("Segoe UI", 10, "bold"), relief="flat", cursor="hand2", command=self.abrir_ventana_reportes).pack(pady=20, ipadx=20, ipady=6)
+
