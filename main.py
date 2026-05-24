@@ -165,3 +165,17 @@ class InterfazGUI:
         # Botón Ver Historial Clinico
         tk.Button(self.ventana, text="Ver Historial Clinico", bg=self.color_morado_claro, fg=self.color_texto, font=("Segoe UI", 10, "bold"), relief="flat", cursor="hand2", command=self.abrir_ventana_reportes).pack(pady=20, ipadx=20, ipady=6)
 
+    def actualizar_lista_razas(self, event):
+        especie_seleccionada = self.combo_especie.get()
+        razas_disponibles = DICCIONARIO_RAZAS[especie_seleccionada]
+        self.combo_raza.configure(values=razas_disponibles)
+        self.combo_raza.set("") 
+
+    def procesar_registro(self):
+        nombre = self.entrada_nombre.get().strip().title()
+        dueno = self.entrada_dueno.get().strip().title()
+        especie = self.combo_especie.get()
+        raza = self.combo_raza.get()
+        sexo = self.combo_sexo.get()
+        edad_str = self.entrada_edad.get().strip()
+        peso_str = self.entrada_peso.get().strip()
