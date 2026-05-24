@@ -179,3 +179,32 @@ class InterfazGUI:
         sexo = self.combo_sexo.get()
         edad_str = self.entrada_edad.get().strip()
         peso_str = self.entrada_peso.get().strip()
+
+        if not nombre or not dueno or not especie or not raza or not sexo or not edad_str or not peso_str:
+            messagebox.showwarning("Campos Vacios", "Por favor, complete todos los datos.")
+            return
+
+        try:
+            peso_float = float(peso_str)
+            edad_int = int(edad_str)
+            fecha_actual = datetime.now().strftime("%d/%m/%Y %H:%M")
+            id_automatico = self.sistema.generar_siguiente_id(especie.lower())
+
+            if especie == "Perro":
+                nueva_mascota = Perro(id_automatico, nombre, raza, sexo, peso_float, edad_int, dueno, fecha_actual)
+            elif especie == "Gato":
+                nueva_mascota = Gato(id_automatico, nombre, raza, sexo, peso_float, edad_int, dueno, fecha_actual)
+            elif especie == "Ave":
+                nueva_mascota = Ave(id_automatico, nombre, raza, sexo, peso_float, edad_int, dueno, fecha_actual)
+
+            self.sistema.registrar_mascota(nueva_mascota)
+            self.entrada_id_buscar.delete(0, tk.END)
+            self.entrada_id_buscar.insert(0, id_automatico)
+            
+            messagebox.showinfo("Registro Exitoso", f"Paciente Registrado\n\nID: {id_automatico}\nNombre: {nombre}")
+
+        except ValueError:
+            messagebox.showerror("Error", "Verifique que edad y peso sean numeros.")
+        except PesoInvalidoError as error:
+            messagebox.showwarning("Aviso", str(error))
+
