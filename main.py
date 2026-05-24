@@ -65,3 +65,25 @@ class ClinicaVeterinaria:
                 f"Medicamento: {medicina.nombre}\n"
                 f"Dosis Calculada: {total_mg} mg\n"
                 f"--------------------------")
+
+class InterfazGUI:
+    def __init__(self, ventana: tk.Tk):
+        self.ventana = ventana
+        self.ventana.title("VetCare Pro - Sistema de Gestion Clinica")
+        self.ventana.geometry("520x820")
+        
+        # --- PALETA DE COLORES ---
+        self.color_fondo = "#F4F4F9"            
+        self.color_texto = "#000000"            
+        self.color_morado_oscuro = "#512DA8"    
+        self.color_lila = "#9B59B6"             
+        self.color_morado_claro = "#D1C4E9"     
+        
+        self.ventana.configure(bg=self.color_fondo)
+
+        style = ttk.Style()
+        style.theme_use("clam") 
+
+        self.sistema = ClinicaVeterinaria("VetCare Pro")
+        self.cargar_medicamentos()
+        self.dibujar_elementos()
