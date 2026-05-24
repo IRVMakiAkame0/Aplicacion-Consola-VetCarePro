@@ -42,3 +42,20 @@ class Ave(Mascota):
         
     def revisar_paciente(self) -> str:
         return "Inspección aviar"
+
+class Medicamento:
+    def __init__(self, nombre: str, dosis_base_mg: float, especies_toxicas: list[str]):
+        self.nombre: str = nombre
+        self.dosis_base_mg: float = dosis_base_mg
+        self.especies_toxicas: list[str] = especies_toxicas 
+
+    def calcular_dosis_final(self, peso_animal: float) -> float:
+        return peso_animal * self.dosis_base_mg
+
+    def verificar_si_es_peligroso(self, especie_paciente: str) -> bool:
+        return especie_paciente.lower() in [e.lower() for e in self.especies_toxicas]
+
+class ValidarDatos:
+    def verificar_numero_correcto(self, valor: float) -> bool:
+        return valor > 0
+        
