@@ -46,7 +46,7 @@ El código está organizado en cuatro archivos bajo el paradigma de Programació
 1. **Prueba de Registro e ID:** Complete los datos de un paciente y haga clic en "Registrar y Generar ID". El sistema limpiará los errores tipográficos, mostrará una ventana emergente de éxito confirmando el registro y pegará automáticamente el nuevo ID generado en la zona de orden médica.
 2. **Validación de peso y edad:** Intente ingresar letras o un número negativo en el peso/edad. El sistema capturará la excepción y desplegará una alerta advirtiendo sobre el error de formato, bloqueando el guardado.
 3. **Prueba de Toxicidad (Regla de Negocio):** Registre un paciente de especie "Gato". Luego, en la zona médica, intente recetarle el medicamento "Permetrina" o "Ibuprofeno". El sistema debe lanzar la excepción MedicamentoPeligrosoError, cancelar la receta y mostrar una alerta médica de contraindicación.
-4. **Cálculo de dosis exitoso:** Seleccione un medicamento seguro (Ej. "Amoxicilina"). Verifique que la receta final muestre el cálculo correcto ($Peso \times Dosis Base$).
+4. **Cálculo de dosis exitoso:** Seleccione un medicamento seguro (Ej. "Amoxicilina"). Verifique que la receta final muestre el cálculo correcto (Peso x Dosis Base).
 5. **Reportes:** Abra el historial clínico, registre varios pacientes y utilice la barra superior para buscar por el nombre del dueño o filtrar por "Hoy (Día)".
 
 
